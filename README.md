@@ -1,5 +1,5 @@
 # Service Manual
-Simple REST API.
+REST API for an electric service manual.
 ## Usage
 ### Setting up database
 * install MongoDB if you don't have it already
@@ -8,8 +8,10 @@ Simple REST API.
 * clone this repo
 * cd to repo
 * run `npm install` to install modules
-* run `npm start` to start to start the app
-### Test querys
+* run `npm start` to start the app
+### General info
+For this app to work you must first initialize some data about some devices in to the database. Data can be anything, from device name to production year to device model or type. After that you can start to query.
+### Querys
 You can query this API using Postman.
 1. Adding data
 2. Updating data
