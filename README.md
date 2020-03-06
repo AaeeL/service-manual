@@ -13,7 +13,7 @@ REST API for an electric service manual.
 For this app to work you must first initialize some data about some devices in to the database. Data can be anything, from device name to production year to device model or type. After that you can start to query.
 ### Querys
 You can query this API using Postman.
-1. Inserting data
+1. **Inserting data**
   - To insert data to database send a POST request to `/api/insert`
   - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field has to be a number from 1 to 3.
 2. Updating data
