@@ -23,6 +23,7 @@ const sort = data => {
         return new Date(b.date) - new Date(a.date)
     })
 
+    // finally concat everything together
     sorted = medCrit.concat(lowCrit)
     const final = highCrit.concat(sorted)
 

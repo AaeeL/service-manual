@@ -1,4 +1,4 @@
-// Function used to check data for errors
+// Function used to check if data is empty
 const isEmpty = (str) => {
     return (!str || str.length === 0 || !str.trim());
 }

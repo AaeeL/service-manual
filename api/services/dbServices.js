@@ -90,8 +90,6 @@ const updateTarget = async (data) => {
         console.log(error)
         return {success: false, status: 500}
     }
-
-    return 'öäääääöööö'
 }
 
 module.exports = {insert, findAll, findOne, deleteTarget, updateTarget}
