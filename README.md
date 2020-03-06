@@ -15,7 +15,8 @@ For this app to work you must first initialize some data about some devices in t
 You can query this API using Postman.
 1. **Inserting data**
   - To insert data to database send a POST request to `/api/insert`
-  - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field has to be a number from 1 to 3.
-2. Updating data
-3. Deleting data
-4. Searcing and filtering a search
+  - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field has to be a number (not in string form) from 1 to 3.
+  - Example query: `{target: "some device name", description: "some description", criticality: 3}`
+2. **Updating data**
+3. **Deleting data**
+4. **Searcing and filtering a search**
