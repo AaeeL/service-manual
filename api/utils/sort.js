@@ -1,10 +1,13 @@
+//Function to sort fetched data
 const sort = data => {
     let sorted = []
 
+    // first sort based on criticality
     data.sort((a, b) => {
         return b.criticality - a.criticality
     })
 
+    // then filter data by criticality and sort based on date
     const lowCrit = data.filter(object => object.criticality == 1)
     lowCrit.sort((a, b) => {
         return new Date(b.date) - new Date(a.date)

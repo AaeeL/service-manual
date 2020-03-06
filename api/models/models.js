@@ -1,13 +1,15 @@
+// This file contains the databse schemas
 const mongoose = require('mongoose')
 
-//Model and schema for maintenances
+//Model and schema for maintenances tasks
 const MaintenanceSchema = new mongoose.Schema({
     _id: {type: String, required: true},
     target: {type: String, required: true},
     date: {type: Date, required: true},
     description: {type: String, required: true},
     criticality: {type: Number, required: true},
-    state: {type: String, required: true}
+    state: {type: String, required: true},
+    updated: {type: Date, default: null}
 })
 
 const Maintenance = mongoose.model('Maintenance', MaintenanceSchema)
