@@ -3,7 +3,10 @@
 // import router from express
 const router = require('express').Router()
 
+// import database services
 const {insert, findAll, findOne, deleteTarget, updateTarget} = require('../services/dbServices')
+
+// import some functions
 const {isEmpty} = require('../utils/isEmpty')
 const {sort} = require('../utils/sort')
 
@@ -34,6 +37,7 @@ router.put('/update', async (req, res) => {
         if(!isEmpty(req.body.updates.description)) req.body.disc = true
         if(!isEmpty(req.body.updates.state)) req.body.state = true
         if(!isEmpty(req.body.updates.criticality)) req.body.crit = true
+        // after check proceed on updating
         const result = await updateTarget(req.body)
         if(result.success) res.sendStatus(200)
         else res.sendStatus(400)
@@ -49,7 +53,7 @@ router.delete('/delete', async (req,res) => {
     // proceed to delete target
     try {
         const result = await deleteTarget(req.body)
-        if(!result.success) res.sendStatus(result.status)
+        if(result.success == false) res.sendStatus(400)
         else res.sendStatus(200)
     } catch (error) {
         res.sendStatus(500)
@@ -62,7 +66,7 @@ router.delete('/delete', async (req,res) => {
 router.get('/fetch', async (req, res) => {
     // proceed to fetch all tasks
     const response = await findAll()
-    if(response.success) res.sendStatus(response.status)
+    if(response.success == false) res.sendStatus(400)
     else {
         const result = await sort(response)
         res.send(result)
@@ -75,9 +79,12 @@ router.get('/fetch', async (req, res) => {
 router.get('/fetch_one', async (req, res) => {
     // proceed to find tasks of a certain device
     const response = await findOne(req.query)
-    // sort tasks
-    const sorted = await sort(response)
-    res.send(sorted)
+    if(response.success == false) res.sendStatus(400)
+    else {
+        // sort tasks
+        const sorted = await sort(response)
+        res.send(sorted)
+    }
 })
 
 

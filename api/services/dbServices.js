@@ -25,7 +25,7 @@ const insert = async (data) => {
             return {success: true}
         }
     } catch (error) {
-        // if something goes terribly wrong, end up here
+        // if something goes wrong
         return {success: false, status: 500}
     }
 }
@@ -34,21 +34,20 @@ const insert = async (data) => {
 const findAll = async () => {
     try {
         // fetch all tasks
-        const result = await Maintenance.find({})
-        return result
+        return await Maintenance.find({})
     } catch (error) {
-        // again if something goes wrong
-        return {success: false, status: 500}
+        // if something goes wrong
+        return {success: false}
     }
 }
 
 // Function to fetch maintenance tasks of just one device
 const findOne = async (device) => {
     try {
-        const target = device.name
-        return await Maintenance.find({'target':target})
+        return await Maintenance.find({'target':device.name})
     } catch (error) {
-        return {success: false, status: 500}
+        // if something goes wrong
+        return {success: false}
     }
 }
 
@@ -56,9 +55,11 @@ const findOne = async (device) => {
 const deleteTarget = async (target) => {
     try {
         const response = await Maintenance.deleteOne({'_id':target.target})
+        // if delete count is not equal to 1, deletion was not successful
         if(response.deletedCount != 1) return {success: false, status: 400}
         else return {success: true}
     } catch (error) {
+        // if something goes wrong
         return {success: false, status: 500}
     }
 }
@@ -66,7 +67,7 @@ const deleteTarget = async (target) => {
 // Function to update data
 const updateTarget = async (data) => {
     try {
-        // update data
+        // update data based on what data is new
         if(data.disc) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'description':data.updates.description}})
         if(data.state) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'state':data.updates.state}})
         if(data.crit) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'criticality':parseInt(data.updates.criticality)}})
@@ -74,7 +75,8 @@ const updateTarget = async (data) => {
         await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'updated': new Date().getTime()}})
         return {success: true}
     } catch (error) {
-        return {success: false, status: 500}
+        // if something goes wrong
+        return {success: false}
     }
 }
 
