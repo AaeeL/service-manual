@@ -3,7 +3,7 @@ REST API for an electric service manual.
 ## Usage
 ### Setting up database
 * Install MongoDB if you don't have it already.
-* to start the database, run `mongod` from the file where you installed MongoDB.
+* To start the database, run `mongod` from the file where you installed MongoDB.
 ### Running this api
 * Clone this repo.
 * cd to repo.
@@ -24,7 +24,7 @@ You can query this API using Postman.
   - Example query: `{"description": "some description", "state": "some state", "criticality": "3"}`.
   - Route returns status code `200` if update was successful and `400` if something went wrong.
 3. **Deleting data**
-  - To delete data send a `DELETE` request to `/api/delete`
+  - To delete data send a `DELETE` request to `/api/delete`.
   - Sent data must be in json form containing field `target`. Target is a task id which is created to every task when inserting.
   - Example query: `{"target": "some device id"}`.
   - Route returns status code `200` if document was deleted successfully and `400` if someting went wrong.
