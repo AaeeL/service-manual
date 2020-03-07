@@ -62,7 +62,6 @@ const findOne = async (device) => {
 // Function to delete maintenance task
 const deleteTarget = async (target) => {
     try {
-        const date = new Date()
         const response = await Maintenance.deleteOne({'_id':target.target})
         if(response.deletedCount > 1) return {success: false, status: 400}
         else return {success: true}
@@ -73,21 +72,12 @@ const deleteTarget = async (target) => {
 
 const updateTarget = async (data) => {
     try {
-        const date = new Date()
-        const response = await Maintenance
-            .updateOne({filter: {'_id':data.target}, 
-                $set: {
-                    'description':data.updates.description,
-                    'criticality':data.updates.criticality,
-                    'state': data.updates.state,
-                    'updated': date.getTime()
-                }})
-                console.log(response)
-                console.log(response.ok == 1)
-        if(response.ok == 1) return {success: true}
-        else return {success: false, status: 400}
+        if(data.disc) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'description':data.updates.description}})
+        if(data.state) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'state':data.updates.state}})
+        if(data.crit) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'criticality':parseInt(data.updates.criticality)}})
+        await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'updated': new Date().getTime()}})
+        return {success: true}
     } catch (error) {
-        console.log(error)
         return {success: false, status: 500}
     }
 }

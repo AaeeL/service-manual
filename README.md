@@ -14,10 +14,12 @@ For this app to work you must first initialize some data about some devices in t
 ### Querys
 You can query this API using Postman.
 1. **Inserting data**
-  - To insert data to database send a POST request to `/api/insert`
+  - To insert data to database send a `POST` request to `/api/insert`
   - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field has to be a number (not in string form) from 1 to 3.
   - Example query: `{target: "some device name", description: "some description", criticality: 3}`
   - Route returns status code `200` if everything went ok and `400` if there was a mistake.
 2. **Updating data**
+  - To update data send a `PUT` request to `/api/update`.
+  - Sent data must be in json form containing fields `description`, 
 3. **Deleting data**
 4. **Searcing and filtering a search**

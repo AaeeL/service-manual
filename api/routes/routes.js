@@ -12,7 +12,7 @@ const {sort} = require('../utils/sort')
 // @access  Public
 router.post('/insert', async (req, res) => {
     // check received data for errors
-    if(isEmpty(req.body.target) || isEmpty(req.body.description) || !req.body.criticality) res.sendStatus(400)
+    if(isEmpty(req.body.target) || isEmpty(req.body.description) || isEmpty(req.body.criticality)) res.sendStatus(400)
     else {
         // if no errors, proceed on inserting a new maintenance task
         const result = await insert(req.body)
@@ -26,9 +26,12 @@ router.post('/insert', async (req, res) => {
 // @access  Public
 router.put('/update', async (req, res) => {
     // proceed to upodate target
+    if(!isEmpty(req.body.updates.description)) req.body.disc = true
+    if(!isEmpty(req.body.updates.state)) req.body.state = true
+    if(!isEmpty(req.body.updates.criticality)) req.body.crit = true
     const result = await updateTarget(req.body)
-    if(!result.success) res.sendStatus(400)
-    else res.sendStatus(200)
+    if(result.success) res.sendStatus(200)
+    else res.sendStatus(400)
 })
 
 // @route   GET api/delete?target=[target_id]
