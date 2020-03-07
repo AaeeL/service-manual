@@ -12,12 +12,16 @@ const {sort} = require('../utils/sort')
 // @access  Public
 router.post('/insert', async (req, res) => {
     // check received data for errors
-    if(isEmpty(req.body.target) || isEmpty(req.body.description) || isEmpty(req.body.criticality)) res.sendStatus(400)
-    else {
-        // if no errors, proceed on inserting a new maintenance task
-        const result = await insert(req.body)
-        if(!result.success) res.sendStatus(result.status)
-        else res.sendStatus(200)
+    try {
+        if(isEmpty(req.body.target) || isEmpty(req.body.description) || isEmpty(req.body.criticality)) res.sendStatus(400)
+        else {
+            // if no errors, proceed on inserting a new maintenance task
+            const result = await insert(req.body)
+            if(!result.success) res.sendStatus(result.status)
+            else res.sendStatus(200)
+        }
+    } catch (error) {
+        res.sendStatus(500)
     }
 })
 
@@ -25,13 +29,17 @@ router.post('/insert', async (req, res) => {
 // @desc    Updates an existing maintenance task
 // @access  Public
 router.put('/update', async (req, res) => {
-    // proceed to upodate target
-    if(!isEmpty(req.body.updates.description)) req.body.disc = true
-    if(!isEmpty(req.body.updates.state)) req.body.state = true
-    if(!isEmpty(req.body.updates.criticality)) req.body.crit = true
-    const result = await updateTarget(req.body)
-    if(result.success) res.sendStatus(200)
-    else res.sendStatus(400)
+    // check what fields are set for updating
+    try {
+        if(!isEmpty(req.body.updates.description)) req.body.disc = true
+        if(!isEmpty(req.body.updates.state)) req.body.state = true
+        if(!isEmpty(req.body.updates.criticality)) req.body.crit = true
+        const result = await updateTarget(req.body)
+        if(result.success) res.sendStatus(200)
+        else res.sendStatus(400)
+    } catch (error) {
+        res.sendStatus(500)
+    }
 })
 
 // @route   GET api/delete?target=[target_id]
@@ -39,9 +47,13 @@ router.put('/update', async (req, res) => {
 // @access  Public
 router.delete('/delete', async (req,res) => {
     // proceed to delete target
-    const result = await deleteTarget(req.body)
-    if(!result.success) res.sendStatus(result.status)
-    else res.sendStatus(200)
+    try {
+        const result = await deleteTarget(req.body)
+        if(!result.success) res.sendStatus(result.status)
+        else res.sendStatus(200)
+    } catch (error) {
+        res.sendStatus(500)
+    }
 })
 
 // @route   GET api/fetch
@@ -63,11 +75,9 @@ router.get('/fetch', async (req, res) => {
 router.get('/fetch_one', async (req, res) => {
     // proceed to find tasks of a certain device
     const response = await findOne(req.query)
-    if(!response.success) res.sendStatus(response.status)
-    else {
-        const result = sort(response.device)
-        res.send(result)
-    }
+    // sort tasks
+    const sorted = await sort(response)
+    res.send(sorted)
 })
 
 
