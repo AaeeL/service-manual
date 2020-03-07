@@ -24,10 +24,10 @@ You can query this API using Postman.
   - Example query: `{"description": "some description", "state": "some state", "criticality": "3"}`.
   - Route returns status code `200` if update was successful and `400` if something went wrong.
 3. **Deleting data**
-   - To delete data send a `DELETE` request to `/api/delete`
-   - Sent data must be in json form containing field `target`. Target is a task id which is created to every task when inserting.
-   - Example query: `{"target": "some device id"}`.
-   - Route returns status code `200` if document was deleted successfully and `400` if someting went wrong.
+  - To delete data send a `DELETE` request to `/api/delete`
+  - Sent data must be in json form containing field `target`. Target is a task id which is created to every task when inserting.
+  - Example query: `{"target": "some device id"}`.
+  - Route returns status code `200` if document was deleted successfully and `400` if someting went wrong.
 4. **Searcing**
   - To search tasks from database send a `GET` request to `/api/fetch`. No params needed.
   - `/api/fetch` returns an array of json objects ordered by criticality and date. If there are no tasks, returns an empty array.
