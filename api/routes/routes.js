@@ -42,7 +42,6 @@ router.put('/update', async (req, res) => {
         if(result.success) res.sendStatus(200)
         else res.sendStatus(400)
     } catch (error) {
-        console.log(error)
         res.sendStatus(500)
     }
 })

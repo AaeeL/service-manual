@@ -79,7 +79,6 @@ const updateTarget = async (data) => {
         return {success: true}
     } catch (error) {
         // if something goes wrong
-        console.log(error)
         return {success: false}
     }
 }
