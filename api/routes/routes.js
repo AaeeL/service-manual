@@ -20,7 +20,7 @@ router.post('/insert', async (req, res) => {
         else {
             // if no errors, proceed on inserting a new maintenance task
             const result = await insert(req.body)
-            if(!result.success) res.sendStatus(result.status)
+            if(!result.success) res.sendStatus(400)
             else res.sendStatus(200)
         }
     } catch (error) {
@@ -53,7 +53,7 @@ router.delete('/delete', async (req,res) => {
     // proceed to delete target
     try {
         const result = await deleteTarget(req.body)
-        if(result.success == false) res.sendStatus(400)
+        if(!result.success) res.sendStatus(400)
         else res.sendStatus(200)
     } catch (error) {
         res.sendStatus(500)

@@ -11,7 +11,7 @@ const insert = async (data) => {
         // first check if there even is a device to which maintenance task is about to be added
         const device = await Device.findOne({'name':data.target})
         // if not, return
-        if(!device) return {success: false, status: 400}
+        if(!device) return {success: false}
         else {
             // else proceed on inserting a new task
             await Maintenance.insertMany({
@@ -26,7 +26,7 @@ const insert = async (data) => {
         }
     } catch (error) {
         // if something goes wrong
-        return {success: false, status: 500}
+        return {success: false}
     }
 }
 
@@ -56,11 +56,11 @@ const deleteTarget = async (target) => {
     try {
         const response = await Maintenance.deleteOne({'_id':target.target})
         // if delete count is not equal to 1, deletion was not successful
-        if(response.deletedCount != 1) return {success: false, status: 400}
+        if(response.deletedCount != 1) return {success: false}
         else return {success: true}
     } catch (error) {
         // if something goes wrong
-        return {success: false, status: 500}
+        return {success: false}
     }
 }
 
