@@ -11,7 +11,7 @@ REST API for an electric service manual.
 * Run `npm install` to install modules.
 * Run `npm start` to start the api.
 ### Initializing data
-For this app to work you must first create a document cointaining some data about some devices in to the database. Data can be anything, from device name to production year to device model or type. After that you can start to query.
+Using mongoDB Compass, initialize a new document which contains devices. Device data can be anything from device name to production year and model. Device name is unique. After that you are good to go.
 ### Querys
 You can query this API using Postman.
 1. **Inserting data**
