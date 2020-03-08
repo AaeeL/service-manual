@@ -67,15 +67,19 @@ const deleteTarget = async (target) => {
 // Function to update data
 const updateTarget = async (data) => {
     try {
+        // first check if maintenance exists
+        if(!await Maintenance.findById({'_id':data.target})) return {success: false}
         // update data based on what data is new
-        if(data.disc) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'description':data.updates.description}})
-        if(data.state) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'state':data.updates.state}})
-        if(data.crit) await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'criticality':parseInt(data.updates.criticality)}})
+        const target = data.target
+        if(data.disc) await Maintenance.findByIdAndUpdate(target, {description:data.updates.description})
+        if(data.state) await Maintenance.findByIdAndUpdate(target, {state:data.updates.state})
+        if(data.crit) await Maintenance.findByIdAndUpdate(target, {criticality:data.updates.criticality})
         // set update time
-        await Maintenance.updateOne({filter: {'_id':data.target}, $set: {'updated': new Date().getTime()}})
+        await Maintenance.findByIdAndUpdate(target, {updated: new Date().getTime()})
         return {success: true}
     } catch (error) {
         // if something goes wrong
+        console.log(error)
         return {success: false}
     }
 }

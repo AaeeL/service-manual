@@ -21,8 +21,8 @@ You can query this API using Postman.
   - Route returns status code `200` if everything went ok and `400` if there was a mistake.
 2. **Updating data**
   - To update data send a `PUT` request to `/api/update`.
-  - Sent data must be in json form containing fields two main fields `target` and `updates`. Updates is a json object and contains fields `description`, `state` and `criticality`. Again, all data in the fields has to be in string form and ciriticality is a number from 1 to 3.
-  - Example query: `{"target":"device id", updates: {"description": "some description", "state": "some state", "criticality": "3"}}`.
+  - Sent data must be in json form containing fields two main fields `target` and `updates`. Target contains a maintenance id and updates is a json object and contains fields `description`, `state` and `criticality`. Again, all data in the fields has to be in string form and ciriticality is a number from 1 to 3.
+  - Example query: `{"target":"maintenance id", updates: {"description": "some description", "state": "some state", "criticality": "3"}}`.
   - Route returns status code `200` if update was successful and `400` if something went wrong.
 3. **Deleting data**
   - To delete data send a `DELETE` request to `/api/delete`.
@@ -36,3 +36,5 @@ You can query this API using Postman.
   - To search tasks of a one specific device send a `GET` request to `/api/fetch_one` with a device name.
   - Example query: `/api/fetch_one?name=device name`.
   - Returned value is an array of json objects ordered by criticality and date. If there were no tasks, returned value is an empty array.
+### Possible bugs
+* Sometimes mongoDB does not update the wanted document. This is because, for some reason, the 
