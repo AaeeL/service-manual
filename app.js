@@ -13,12 +13,15 @@ const app = express()
 // Server port
 const PORT = process.env.PORT || 5001;
 
+// Database address, you can change change this depending on your database name
+const dbAddress = 'mongodb://localhost:27017/servicemanual'
+
 // Make app use body parser and routes
 app.use(bodyParser.json())
 app.use('/api', routes)
 
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/servicemanual', {
+mongoose.connect(dbAddress, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true

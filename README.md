@@ -3,14 +3,15 @@ REST API for an electric service manual.
 ## Usage
 ### Setting up database
 * Install MongoDB if you don't have it already.
-* To start the database, run `mongod` from the file where you installed MongoDB.
+* To start the database server, run `mongod` from the file where you installed MongoDB.
+* Create a new database and name it for example `servicemanual`. Easiest way to do this is to use mongoDB Compass.
 ### Running this api
 * Clone this repo.
 * cd to repo.
 * Run `npm install` to install modules.
 * Run `npm start` to start the api.
 ### Initializing data
-For this app to work you must first initialize some data about some devices in to the database. Data can be anything, from device name to production year to device model or type. After that you can start to query.
+For this app to work you must first create a document cointaining some data about some devices in to the database. Data can be anything, from device name to production year to device model or type. After that you can start to query.
 ### Querys
 You can query this API using Postman.
 1. **Inserting data**
