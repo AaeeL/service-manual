@@ -16,17 +16,17 @@ Using mongoDB Compass, create a new collection which contains devices and name i
 You can query this API using Postman.
 1. **Inserting data**
   - To insert data to database send a `POST` request to `/api/insert`.
-  - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field has to be a number from 1 to 3. All the data in the fields must be in string form.
+  - Sent data must be in json form containing fields `target`, `description` and `criticality`. Criticality field is a number from 1 to 3. All the data in the fields must be in string form.
   - Example query: `{"target": "some device name", "description": "some description", "criticality": "3"}`.
   - Route returns status code `200` if everything went ok and `400` if there was a mistake.
 2. **Updating data**
   - To update data send a `PUT` request to `/api/update`.
-  - Sent data must be in json form containing two main fields `target` and `updates`. Target contains a maintenance id and updates is a json object and contains fields `description`, `state` and `criticality`. Again, all data in the fields has to be in string form and ciriticality is a number from 1 to 3.
+  - Sent data must be in json form containing two main fields `target` and `updates`. Target contains a maintenance task id and updates is a json object and contains fields `description`, `state` and `criticality`. Again, all data in the fields has to be in string form and ciriticality is a number from 1 to 3.
   - Example query: `{"target":"task id", updates: {"description": "some description", "state": "some state", "criticality": "3"}}`.
   - Route returns status code `200` if update was successful and `400` if something went wrong.
 3. **Deleting data**
   - To delete data send a `DELETE` request to `/api/delete`.
-  - Sent data must be in json form containing field `target`. Target is a task id which is created to every task when inserting.
+  - Sent data must be in json form containing field `target`. Target is a task id.
   - Example query: `{"target": "task id"}`.
   - Route returns status code `200` if document was deleted successfully and `400` if someting went wrong.
 4. **Searcing**
