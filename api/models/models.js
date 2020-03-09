@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 //Model and schema for maintenances tasks
 const MaintenanceSchema = new mongoose.Schema({
-    _id: {type: String, required: true, unique: true},
+    _id: {type: String, required: true},
     target: {type: String, required: true},
     date: {type: Date, required: true},
     description: {type: String, required: true},
